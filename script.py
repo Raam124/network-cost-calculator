@@ -42,14 +42,7 @@ def calculate_cost(G, rate_card):
                     
                     # Calculating Pot cost for RATE CARD B
                     if rate_card == RATE_CARD_B:
-                        if G.nodes[next_node]["type"] != "Cabinet":
-                            pot_cost = 20 * length
-                            total_cost += pot_cost
-                        else:
-                            # Calculate trench length from current node to the next node
-                            edge_data = G.edges[current_node, next_node]
-                            length = edge_data["length"]
-                            total_cost += 20 * length                
+                        total_cost += 20 * length                
                 
                 pot_costs[pot] = total_cost
             except nx.NetworkXNoPath:
