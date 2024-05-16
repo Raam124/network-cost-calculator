@@ -39,10 +39,17 @@ def calculate_cost(G, rate_card):
                         if G.nodes[current_node]["type"] == "Pot":
                             pot_cost = rate_card["pot_cost"]
                             total_cost += pot_cost
-                    
                     # Calculating Pot cost for RATE CARD B
-                    if rate_card == RATE_CARD_B:
-                        total_cost += 20 * length                
+                    elif rate_card == RATE_CARD_B:
+                        total_cost += 20 * length
+                    else:
+                        """This else block is added only for the testing purposes. if we wanna check with a fixed pot cost 
+                        for rate card b or an entirely new rate card in test case (with only fixed values for pot cost) this block will get triggered. 
+                        Currently this will only get triggered in "test_rate_card_b_with_pot_cost" testcase. """
+
+                        if G.nodes[current_node]["type"] == "Pot":
+                            pot_cost = rate_card["pot_cost"]
+                            total_cost += pot_cost         
                 
                 pot_costs[pot] = total_cost
             except nx.NetworkXNoPath:
@@ -62,10 +69,10 @@ if __name__ == "__main__":
 
     print("Costs for Rate Card A:")
     for pot, cost in pot_costs_a.items():
-        print(f"Pot {pot}: £{cost}")
+        print(f"Pot {pot}: £ {cost}")
     print("Total Cost using Rate Card A: £", total_cost_a)
 
     print("\nCosts for Rate Card B:")
     for pot, cost in pot_costs_b.items():
-        print(f"Pot {pot}: £{cost}")
+        print(f"Pot {pot}: £ {cost}")
     print("Total Cost using Rate Card B: £", total_cost_b)
